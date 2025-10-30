@@ -11,88 +11,119 @@ struct product {
 struct customer {
     char cname[20];
     char address[50];
-    int number;
+    long long number;  // Changed to long long for 10-digit phone numbers
 };
 
 // Function to calculate amount with 18% GST
 float AmoGST(float price, int Q) {
-    return Q * (price + (price * 18 / 100));
+    return Q * (price + (price * 18.0 / 100.0));  // Use floating point division
 }
 
 int main() {
     int n;
-    printf("             SHRI GANESH ENTERPRISES            ");
-    printf("\n *************************************************");
-    printf("\n ENTER THE NO OF CUSTOMERS : ");
+    printf("             SHRI GANESH ENTERPRISES            \n");
+    printf(" *************************************************\n");
+    printf(" ENTER THE NO OF CUSTOMERS : ");
     scanf("%d", &n);
-
+    
+    // Validate input
+    if (n <= 0 || n > 20) {
+        printf("Invalid number of customers. Must be between 1 and 20.\n");
+        return 1;
+    }
+    
     struct customer c[20];
     struct product p[20];
-
-    for (int k = 0; k < n; k++) {
-        printf("\nNAME OF CUSTOMER %d: ", k + 1);
+    
+    int k;
+    for(k = 0; k < n; k++) {
+        printf("\n=== CUSTOMER %d ===\n", k + 1);
+        printf("NAME OF CUSTOMER: ");
         scanf("%s", c[k].cname);
-
+        
         printf("ADDRESS OF CUSTOMER: ");
-        scanf(" %[^\n]s", c[k].address);  // read full line
-
+        scanf(" %[^\n]", c[k].address);  // Fixed: removed 's' after %[^\n]
+        
         printf("PHONE NUMBER OF CUSTOMER: ");
-        scanf("%d", &c[k].number);
-
+        scanf("%lld", &c[k].number);  // Changed to %lld for long long
+        
         int m;
         printf("\nNUMBER OF PRODUCTS: ");
         scanf("%d", &m);
-
-        float AmoPro[10];
-        for (int j = 0; j < m; j++) {
-            printf("\nNAME OF PRODUCT %d: ", j + 1);
+        
+        // Validate product count
+        if (m <= 0 || m > 20) {
+            printf("Invalid number of products. Must be between 1 and 20.\n");
+            k--;  // Retry this customer
+            continue;
+        }
+        
+        float AmoPro[20];  // Increased size to match product array
+        int j;
+        for (j = 0; j < m; j++) {
+            printf("\n--- PRODUCT %d ---\n", j + 1);
+            printf("NAME OF PRODUCT: ");
             scanf("%s", p[j].pname);
-
+            
             printf("PRICE OF PRODUCT: ");
             scanf("%f", &p[j].price);
-
+            
             printf("QUANTITY: ");
             scanf("%d", &p[j].Quantity);
-
+            
             AmoPro[j] = AmoGST(p[j].price, p[j].Quantity);
         }
-
+        
         int ch;
-        printf("\nARE YOU OLD OR NEW CUSTOMER?");
-        printf("\nFOR OLD = 1 , NEW = 0");
-        printf("\nENTER YOUR STATUS: ");
+        printf("\nARE YOU OLD OR NEW CUSTOMER?\n");
+        printf("FOR OLD = 1, NEW = 0\n");
+        printf("ENTER YOUR STATUS: ");
         scanf("%d", &ch);
-
+        
+        // Calculate total before discount
         float final_price = 0;
-        for (int i = 0; i < m; i++) {
+        int i;
+        for (i = 0; i < m; i++) {
             final_price += AmoPro[i];
         }
-
+        
+        // Apply discount (fixed logic: old customers get more discount)
         float total_bill;
-        if (ch == 0)
-            total_bill = final_price - ((final_price * 5) / 100);
-        else
-            total_bill = final_price - ((final_price * 10) / 100);
-
-        // Bill print
-        printf("\n**********************************************");
-        printf("\n          SHRI GANESH ENTERPRISES ");
-        printf("\n**********************************************");
-        printf("\n           // BILL OF PRODUCTS //");
-        printf("\n################################################");
-        printf("\nNAME\t\tADDRESS\t\tNUMBER");
-        printf("\n%s\t\t%s\t\t%d", c[k].cname, c[k].address, c[k].number);
-
-        printf("\n\nPRODUCT\tQUANTITY\tPRICE\t\tBILL");
-        for (int i = 0; i < m; i++) {
-            printf("\n%s\t%d\t\t%.2f\t\t%.2f", p[i].pname, p[i].Quantity, p[i].price, AmoPro[i]);
+        float discount_rate;
+        if (ch == 1) {  // Old customer gets 10% discount
+            discount_rate = 10.0;
+            total_bill = final_price - ((final_price * 10.0) / 100.0);
+        } else {  // New customer gets 5% discount
+            discount_rate = 5.0;
+            total_bill = final_price - ((final_price * 5.0) / 100.0);
         }
-
-        printf("\n\nTOTAL NO OF PRODUCTS : %d", m);
-        printf("\nTOTAL BILL = %.2f", total_bill);
-        printf("\n################################################\n");
+        
+        // Bill print
+        printf("\n**********************************************\n");
+        printf("          SHRI GANESH ENTERPRISES \n");
+        printf("**********************************************\n");
+        printf("           // BILL OF PRODUCTS //\n");
+        printf("################################################\n");
+        printf("NAME: %s\n", c[k].cname);
+        printf("ADDRESS: %s\n", c[k].address);
+        printf("PHONE: %lld\n", c[k].number);
+        printf("################################################\n");
+        printf("\n%-15s %-10s %-10s %-10s\n", "PRODUCT", "QUANTITY", "PRICE", "AMOUNT");
+        printf("-----------------------------------------------\n");
+        
+        for (i = 0; i < m; i++) {
+            printf("%-15s %-10d %-10.2f %-10.2f\n", 
+                   p[i].pname, p[i].Quantity, p[i].price, AmoPro[i]);
+        }
+        
+        printf("-----------------------------------------------\n");
+        printf("TOTAL NO OF PRODUCTS: %d\n", m);
+        printf("SUBTOTAL: %.2f\n", final_price);
+        printf("DISCOUNT (%.0f%%): %.2f\n", discount_rate, 
+               final_price - total_bill);
+        printf("TOTAL BILL: %.2f\n", total_bill);
+        printf("################################################\n\n");
     }
-
+    
     return 0;
 }
-
