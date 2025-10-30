@@ -49,9 +49,6 @@ The project includes **two implementations**:
  ┣ 📜 README.md
  ┣ 📜 billing_c_version.c
  ┣ 📜 billing_cpp_version.cpp
- ┗ 📸 screenshots/
-    ┣ bill_output_example.png
-    ┗ run_demo.gif
 ```
 
 ---
@@ -116,12 +113,11 @@ Through this project, you will strengthen:
 
 ## 🧑‍💻 Author
 
-**Ayush [Your Full Name]**  
+**Ayush Rewatkar**  
 🎓 Computer Engineering Student  
 💡 Passionate about System Programming, C/C++, and Problem Solving  
 
-🔗 [GitHub Profile](https://github.com/yourusername)  
-📧 your.email@example.com  
+🔗 [GitHub Profile](https://github.com/AyushR-Tech)
 
 ---
 
