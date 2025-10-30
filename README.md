@@ -8,18 +8,17 @@ Here's an improved and more professional version of your README.md:
 ---
 
 ## 📋 Table of Contents
-- [Overview](#-overview)
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Installation & Usage](#️-installation--usage)
-- [Sample Output](#-sample-output)
-- [Project Structure](#-project-structure)
-- [Calculation Logic](#-calculation-logic)
-- [Learning Outcomes](#-learning-outcomes)
-- [Future Enhancements](#-future-enhancements)
-- [Contributing](#-contributing)
-- [Author](#-author)
-
+- 🎯 Overview
+- ✨ Features
+- 🧰 Tech Stack
+- 🖥️ Installation & Usage
+- 📸 Sample Output
+- 📂 Project Structure
+- 🧮 Calculation Logic
+- 🎓 Learning Outcomes
+- 🚀 Future Enhancements
+- 🤝 Contributing
+- 👨‍💻 Author
 ---
 
 ## 🎯 Overview
