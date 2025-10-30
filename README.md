@@ -5,9 +5,6 @@ Here's an improved and more professional version of your README.md:
 
 > A professional **console-based billing system** built in **C** and **C++** showcasing fundamental programming concepts, GST calculations, and object-oriented design principles.
 
-[![Language](https://img.shields.io/badge/Language-C%2FC%2B%2B-blue.svg)](https://github.com/AyushR-Tech/billing-system)
-[![Status](https://img.shields.io/badge/Status-Active-success.svg)](https://github.com/AyushR-Tech/billing-system)
-
 ---
 
 ## 📋 Table of Contents
